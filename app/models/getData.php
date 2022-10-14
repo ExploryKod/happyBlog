@@ -1,7 +1,7 @@
 <?php
 require_once("db_connexion.php");
 
-function getUserData() {
+function getUserData($pdo) {
 
     $req = $pdo->prepare("SELECT id, `username`, `password` FROM user");
     $req->execute();

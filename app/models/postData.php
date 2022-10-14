@@ -1,7 +1,7 @@
 <?php
 require_once("db_connexion.php");
 
-function postUserData() {
+function postUserData($pdo) {
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
@@ -30,12 +30,10 @@ function postUserData() {
                     ":password" => $password
                 ]);
 
-                //http_response_code(302);
-                //header('Location: accueil');
+                http_response_code(302);
+                //header('Location: ');
                 exit();
             }
         }
     }
-
-
 }
