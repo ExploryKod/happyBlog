@@ -1,10 +1,7 @@
-<?php ob_start(); ?>
 
-<?php
-if( isset($_POST['register'])) {
-require("../src/models/register.php");
-    }
-    ?>
+
+
+<?php require("layout.php") ?>
 <main class="container-fluid p-0">
 
     <section class="container-fluid custom-hero-container">
@@ -37,7 +34,7 @@ require("../src/models/register.php");
     </section>
 </main>
 
-<?php $content = ob_get_clean(); ?>
-
-<?php require("layout.php");
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="../src/public/js/script.js?<?php echo time(); ?>"></script>
+</body>
+</html>

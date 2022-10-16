@@ -1,8 +1,5 @@
-
-<?php ob_start(); ?>
-
+<?php require("layout.php") ?>
 <main>
-
     <?php
         require("../src/models/getData.php");
         require("../src/models/postData.php");
@@ -41,6 +38,8 @@
     </section>
 
 </main>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    <script src="../src/public/js/script.js?<?php echo time(); ?>"></script>
+</body>
+</html>
 
-<?php $content = ob_get_clean(); ?>
-<?php require("layout.php"); ?>

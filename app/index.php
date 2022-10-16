@@ -1,13 +1,14 @@
 
-
 <?php
 
-print_r($_SERVER['REQUEST_URI']);
-if ($_SERVER['REQUEST_URI'] == '/')     {
+if(!isset($_SESSION["user"])){
 
-    require("template/welcome.php");
-
-} elseif ($_SERVER['REQUEST_URI'] == '/register_form.php') {
-
-    require("template/register_form.php");
+    require("template/login_form.php");
+} else {
+    session_start();
+    print_r($_SESSION);
+    require("template/homepage.php");
 }
+
+
+

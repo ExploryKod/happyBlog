@@ -1,4 +1,6 @@
-<?php ob_start(); ?>
+
+<?php require("layout.php") ?>
+
     <main class="container-fluid p-0">
         <section class="container-fluid custom-hero-container">
             <div class="d-flex justify-content-center align-item-center py-5 p-0">
@@ -12,7 +14,7 @@
         </section>
 
         <section class="container mt-5 d-flex justify-content-center align-item-center">
-            <form class="shadow bg-light p-5" action="welcome.php" method="POST">
+            <form class="shadow bg-light p-5" action="../index.php" method="POST">
                 <div class="mb-3">
                     <label for="username" class="form-label">Créez un pseudo: <span>*</span> :</label>
                     <input class="form-control" id="username" type="text" name="username" maxlength="250"  aria-describedby="username-input"  required >
@@ -29,6 +31,9 @@
             </form>
         </section>
     </main>
-<?php $content = ob_get_clean(); ?>
 
-<?php require("layout.php"); ?>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<script src="../src/public/js/script.js?<?php echo time(); ?>"></script>
+</body>
+</html>
