@@ -33,7 +33,7 @@ require("layout.php");
                 <textarea class="form-control" id="post" name="post"  cols="30" rows="4" placeholder="<?= $myPost['post'] ?>" onfocus="this.onfocus=null;" maxlength="950" required ></textarea>
             </div>
 
-            <input  id="client-id" type="hidden" name="id" value="<?= $myPost["id"] ?>" >
+            <input  id="client-id" type="hidden" name="article-id" value="<?= $myPost["id"] ?>" >
 
             <div class="mb-3">
                 <input class="btn btn-primary btn-lg" type="submit" value="Modifier l'article" name="modify_article">

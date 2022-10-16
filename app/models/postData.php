@@ -47,15 +47,15 @@ function modifyData($pdo) {
 
         if (isset($_POST['modify_article'])) {
 
-            $id = filter_input(INPUT_POST, "id");
+            $id = filter_input(INPUT_POST, "article-id");
             $title = filter_input(INPUT_POST, "title");
             $post = filter_input(INPUT_POST, "post");
 
 
             $query = $pdo->prepare(
                 "UPDATE posts
-                SET title = :title, `post` = :post,
-                WHERE id=:id");
+                SET title = :title, `post` = :post
+                WHERE id=:id ");
             $query->execute([
                 ":title" => $title,
                 ":post" => $post,
