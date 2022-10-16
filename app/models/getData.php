@@ -27,7 +27,7 @@ function getOnlyYourPosts($pdo) {
     $SelectYourPost = $bdd->prepare('SELECT * FROM posts INNER JOIN user WHERE posts.user_id = user.id');
     $SelectYourPost -> execute();
     $your_post_list = $SelectYourPost->fetchAll(PDO::FETCH_ASSOC);
-
+    $your_id = $your_post_list[0]['user_id'];
     return $your_post_list;
 }
 

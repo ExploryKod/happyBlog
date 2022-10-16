@@ -12,7 +12,7 @@ $everyPost-> execute();
 $allposts = $everyPost-> fetchAll(PDO::FETCH_ASSOC);
 
 // As we can't use a session superglobal as we already call it, we fetch the user id from here:
-if(isset($your_id)) {
+if(isset($your_post_list[0]['user_id'])) {
 $your_id = $your_post_list[0]['user_id'];
 }
 // We create an array with all values but without repeated values:
@@ -53,7 +53,7 @@ require('layout.php'); ?>
             <h2>Liste de vos articles: </h2>
             <?php if(!isset($your_id)) { ?>
             <div class="w-50 mt-5 alert alert-info" role="alert">
-                Vous n'avez pas encore d'articles.
+                Vous n'avez pas encore d'articles ou alors si vous venez de les créér : rafraîchissez la page.
             </div>
             <?php } ?>
 
@@ -77,6 +77,7 @@ require('layout.php'); ?>
                             <th scope="row"><?php echo $one_post['user_id'] ?></th>
                             <td><?php echo $one_post['title'] ?></td>
                             <td><a href='models/delete.php?id=<?php echo $one_post['id'] ?>'>Supprimer ce post </a></td>
+                            <td><a href='models/update_form.php?id=<?php echo $one_post['id'] ?>'>modifier ce post </a></td>
                             <td></td>
                         </tr>
                         <?php endif ?>

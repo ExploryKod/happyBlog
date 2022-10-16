@@ -42,4 +42,33 @@ function postsData($pdo) {
     }
 }
 
+function modifyData($pdo) {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+        if (isset($_POST['modify_article'])) {
+
+            $id = filter_input(INPUT_POST, "id");
+            $title = filter_input(INPUT_POST, "title");
+            $post = filter_input(INPUT_POST, "post");
+
+
+            $query = $pdo->prepare(
+                "UPDATE clients 
+                SET title = :title, `post` = :post,
+                WHERE id=:id");
+            $query->execute([
+                ":title" => $title,
+                ":post" => $post,
+                ":id" => $id
+            ]);
+
+            http_response_code(302);
+            header('Location: ../profile.php');
+            exit();
+
+        }
+    }
+}
+
 postsData($pdo);
+modifyData($pdo);

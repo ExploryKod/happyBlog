@@ -1,1 +1,0 @@
-console.log('Nous sommes bien connecté dans js/script.js')
