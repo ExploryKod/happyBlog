@@ -26,6 +26,7 @@ require('layout.php'); ?>
 <main class="container-fluid">
     <section class="container d-flex align-content-center justify-content-center">
         <h1>Bienvenue sur votre page</h1>
+        <a class="btn btn-primary" href="logout.php">Me déconnecter</a>
     </section>
     <section class="mt-5 row">
 

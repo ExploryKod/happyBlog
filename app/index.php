@@ -1,7 +1,7 @@
 <?php require("layout.php") ?>
 
 <main>
-    <section class="container-fluid custom-hero-container position-absolute top-0 left-0">
+    <section class="container-fluid custom-hero-container">
         <div class="d-flex justify-content-center align-item-center py-5 p-0">
             <div class="p-sm-5 pb-sm-5 mx-sm-5 bg-custom-secundary-transparent position-relative rounded-3">
                 <div>
