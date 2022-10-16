@@ -18,15 +18,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if($row > 0)
         {
-            if($password ===  $subscribed_users['password'])
+            if(password_verify($password, $subscribed_users['password']))
             {
                 $_SESSION['user'] =  $subscribed_users['id'];
-                ?>
-                <script> location.replace("../../index.php"); </script>
-            <?php
+                header('Location: ../profile.php');
                 die();
+
             }else{
-                header("Location: form.php");
+                header("Location: ../index.php?error=1");
                 die();
             };
         }

@@ -14,7 +14,7 @@
         </section>
 
         <section class="container mt-5 d-flex justify-content-center align-item-center">
-            <form class="shadow bg-light p-5" action="../index.php" method="POST">
+            <form class="shadow bg-light p-5" action="../models/register.php" method="POST">
                 <div class="mb-3">
                     <label for="username" class="form-label">Créez un pseudo: <span>*</span> :</label>
                     <input class="form-control" id="username" type="text" name="username" maxlength="250"  aria-describedby="username-input"  required >
@@ -34,6 +34,6 @@
 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-<script src="../src/public/js/script.js?<?php echo time(); ?>"></script>
+<script src="public/js/script.js?<?php echo time(); ?>"></script>
 </body>
 </html>
