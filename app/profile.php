@@ -77,7 +77,7 @@ require('layout.php'); ?>
                             <th scope="row"><?php echo $one_post['user_id'] ?></th>
                             <td><?php echo $one_post['title'] ?></td>
                             <td><a href='models/delete.php?id=<?php echo $one_post['id'] ?>'>Supprimer ce post </a></td>
-                            <td><a href='models/update_form.php?id=<?php echo $one_post['id'] ?>'>modifier ce post </a></td>
+                            <td><a href='update_form.php?id=<?php echo $one_post['id'] ?>'>modifier ce post </a></td>
                             <td></td>
                         </tr>
                         <?php endif ?>
