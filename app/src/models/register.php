@@ -15,6 +15,7 @@ if(!empty($_POST['username']) && !empty($_POST['password'])) {
     $data = $check->fetch();
     $row = $check->rowCount();
 
+    // L'utilisateur existe si $row != 0 sinon:
     if ($row === 0) {
 
         // On hash le mot de passe avec Bcrypt, via un coût de 12
@@ -28,13 +29,15 @@ if(!empty($_POST['username']) && !empty($_POST['password'])) {
         ]);
 
         //http_response_code(302);
-        header('Location: welcome.php');
+        //header('Location: welcome.php');
         die();
 
 
     } else{
-        header('Location: welcome.php');
+        print_r("no user");
+        //header('Location: welcome.php');
     }
 } else {
-    header('Location: welcome.php');
+    //header('Location: welcome.php');
+    print_r("empty variables");
 }
