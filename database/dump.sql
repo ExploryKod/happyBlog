@@ -20,17 +20,11 @@ CREATE TABLE `posts` (
                          PRIMARY KEY (`id`),
                          KEY `user_id` (`user_id`),
                          CONSTRAINT `posts_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `posts` (`id`, `post`, `user_id`, `title`) VALUES
-                                                           (1,	'dsbdjsds',	NULL,	'my title'),
-                                                           (2,	'dsbdjsds',	NULL,	'my title'),
-                                                           (3,	'dsbdjsds',	NULL,	'my title'),
-                                                           (4,	'Une lame de mer ',	NULL,	'Lame'),
-                                                           (5,	'Une lame de mer ',	NULL,	'Lame'),
-                                                           (6,	'Une lame de mer ',	NULL,	'Lame'),
                                                            (7,	'Une lame de mer ',	NULL,	'Lame'),
-                                                           (8,	'DSSD',	NULL,	'DSDS');
+                                                           (9,	'ma terre est dur',	NULL,	'la brute');
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
@@ -38,14 +32,9 @@ CREATE TABLE `user` (
                         `username` varchar(100) NOT NULL,
                         `password` varchar(100) NOT NULL,
                         PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 
 INSERT INTO `user` (`id`, `username`, `password`) VALUES
-                                                      (10,	'AED',	'$2y$12$DYooJTrQJE51g51br4PufO6bXuufRdq3VWxhYa.ahoues0GJpsThe'),
-                                                      (11,	'joana',	'$2y$12$IzlXNW356X/Fhj8oBaL2ju794rf4VcPDQnmTH7TjbDmhYiv8KGlgG'),
-                                                      (12,	'joele',	'$2y$12$AF/9v10sxRvDxxJPGD.fKu6bCKx9fNx2IScUcCAy7pUqLgjO8.sKS'),
-                                                      (13,	'JOE',	'$2y$12$yxwzWIUfK8CbGu67XcdnQ.9wIQAMTCSNR4HjvSdIWpPnrMJ.vpbJm'),
-                                                      (14,	's',	'$2y$12$1W/Iqdzqjf1E.CovEkOuS.VlACrDFR78LFqOhSkFgfRdHPK1b6l8q'),
-                                                      (15,	'amaury',	'$2y$12$XqexwozH0hy2g20BNEDJ5OKcbePvb9hmN5QgKGvbbUm0y.gAVhEGu');
+    (16,	'amaury',	'$2y$12$LDobHZJwD2oez4x7asOYI.u5q7rWq3bwYQq2fBB3rOZEzU1e/0hLi');
 
--- 2022-10-16 15:42:37
+-- 2022-10-16 21:15:46

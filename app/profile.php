@@ -6,7 +6,21 @@ require_once("models/db_connexion.php");
 $SelectYourPost = $pdo->prepare('SELECT * FROM posts INNER JOIN user WHERE posts.user_id = user.id');
 $SelectYourPost -> execute();
 $your_post_list = $SelectYourPost->fetchAll(PDO::FETCH_ASSOC);
-print_r($your_post_list);
+
+$everyPost = $pdo->prepare('SELECT * FROM posts');
+$everyPost-> execute();
+$allposts = $everyPost-> fetchAll(PDO::FETCH_ASSOC);
+
+// As we can't use a session superglobal as we already call it, we fetch the user id from here:
+if(isset($your_id)) {
+$your_id = $your_post_list[0]['user_id'];
+}
+// We create an array with all values but without repeated values:
+$allvalues = $allposts+$your_post_list;
+
+
+echo "----\n";
+
 require('layout.php'); ?>
 
 <main class="container-fluid">
@@ -37,27 +51,63 @@ require('layout.php'); ?>
 
         <article class="col-sm-6 container d-flex flex-column align-items-start justify-content-start">
             <h2>Liste de vos articles: </h2>
+            <?php if(!isset($your_id)) { ?>
+            <div class="w-50 mt-5 alert alert-info" role="alert">
+                Vous n'avez pas encore d'articles.
+            </div>
+            <?php } ?>
 
+            <?php if(isset($your_id)) { ?>
             <table class="table">
-                <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Handle</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php foreach($your_post_list as $your_post): ?>
-                <tr>
-                    <th scope="row">1</th>
-                    <td><?php echo $your_post['title'] ?></td>
-                    <td><a href='models/delete.php?id=<?php echo $your_post['title'] ?>'>Supprimer ce post </a></td>
-                    <td></td>
-                </tr>
-                <?php endforeach ?>
+                    <thead>
+                    <tr>
+                        <th scope="col">ID du post:</th>
+                        <th scope="col">Votre ID:</th>
+                        <th scope="col">Titre du post:</th>
+                        <th scope="col">Opération</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <?php foreach($allvalues as $one_post):
+                        if($your_id === $one_post['user_id']):
+                        ?>
+
+                        <tr>
+                            <th scope="row"><?php echo $one_post['id'] ?></th>
+                            <th scope="row"><?php echo $one_post['user_id'] ?></th>
+                            <td><?php echo $one_post['title'] ?></td>
+                            <td><a href='models/delete.php?id=<?php echo $one_post['id'] ?>'>Supprimer ce post </a></td>
+                            <td></td>
+                        </tr>
+                        <?php endif ?>
+                    <?php endforeach ?>
+                    </tbody>
+                    </table>
+                <?php } ?>
+
+                <h2 class="mt-2">Liste des articles écrit par d'autres talents: </h2>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Titre du post</th>
+                            <th scope="col">Lire</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php foreach($allposts as $a_post): ?>
+                            <tr>
+                                <th scope="row"><?php echo $a_post['id'] ?></th>
+                                <td><?php echo $a_post['title'] ?></td>
+                                <td><a href='readPost.php?id=<?php echo $a_post['id']?>'>Consulter ce post </a></td>
+                                <td></td>
+                            </tr>
+                        <?php endforeach ?>
+                        </tbody>
+                    </table>
 
         </article>
+
     </section>
 </main>
 

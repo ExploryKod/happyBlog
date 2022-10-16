@@ -1,13 +1,16 @@
 <?php
 require_once("db_connexion.php");
 
-if(!empty($_GET['title']))
-{
-    $title = filter_input(INPUT_POST, "title");
-    $dropClientReq = $pdo->prepare("DELETE FROM posts WHERE title = :title");
+$id = $_GET['id'];
 
-    $dropClientReq->execute([ ":title" => $title ]);
 
-    header("Location: ../profile.php");
-    die();
-}
+require_once("db_connexion.php");
+
+$dropClientReq = $pdo->prepare("DELETE FROM posts WHERE id = :id");
+
+$dropClientReq->execute([ ":id" => $id ]);
+
+header('Location: ../profile.php');
+exit();
+
+
