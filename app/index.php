@@ -1,10 +1,13 @@
+
+
 <?php
 
-require_once("models/getData.php");
-require_once("models/postData.php");
+print_r($_SERVER['REQUEST_URI']);
+if ($_SERVER['REQUEST_URI'] == '/')     {
 
-getUserData($pdo);
-postUserData($pdo);
+    require("template/welcome.php");
 
+} elseif ($_SERVER['REQUEST_URI'] == '/register_form.php') {
 
-require("views/common/template.php");
+    require("template/register_form.php");
+}

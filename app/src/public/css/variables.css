@@ -3,7 +3,6 @@
 :root {
 
     --font-family: 'Open Sans', sans-serif;
-
     --dark-text-color: #03045e;
     --white-text-color: #fff;
 
@@ -37,7 +36,8 @@
     --modal-bg-color: #fff;
     --icon-close-color-hover: #ff0000;
     --icon-close-color: rgb(3, 4, 94);
-
-
     --box-shadow-color: rgba(0, 0, 0, 0.2);
+
+    /* Couleurs de la bannière d'accueil */
+    --secundary-transparent:rgba(66,122,161,0.5);
 }
