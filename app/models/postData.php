@@ -53,7 +53,7 @@ function modifyData($pdo) {
 
 
             $query = $pdo->prepare(
-                "UPDATE clients 
+                "UPDATE posts
                 SET title = :title, `post` = :post,
                 WHERE id=:id");
             $query->execute([
