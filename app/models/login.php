@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if(password_verify($password, $subscribed_users['password']))
             {
                 $_SESSION['user'] =  $subscribed_users['id'];
+
                 header('Location: ../profile.php');
                 die();
 
@@ -29,6 +30,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 die();
             };
         }
-        die();}
-
+        header("Location: ../index.php?error=2");
+        die();
+    } else {
+        header("Location: ../index.php?error=3");
+        die();
+    }
+    header("Location: ../index.php?error=4");
+    die();
 }

@@ -13,12 +13,37 @@
     </section>
     <?php if(isset($_GET['erreur']) && !empty($_GET['erreur'])) {
 
-        if($_GET['erreur'] == 'alreadylog') {
-            ?>
-        <div class="w-50 mt-5 alert alert-info" role="alert">
-            Vous avez déjà un compte chez nous: veuillez vous logger ci-dessous.
-        </div>
+    if($_GET['erreur'] == 'alreadylog') {
+    ?>
+            <section class="container-fluid d-flex justify-content-center align-items-start">
+                <div class="w-50 mt-5 alert alert-info text-center" role="alert">
+                    Vous avez déjà un compte chez nous: veuillez vous logger ci-dessous.
+                </div>
+            </section>
+
     <?php } } ?>
+
+    <?php if(isset($_GET['error']) && !empty($_GET['error'])) {
+
+        if($_GET['error'] == 1) {
+            ?>
+                <section class="container-fluid d-flex justify-content-center align-items-start">
+                    <div class="w-50 mt-5 alert alert-info text-center" role="alert">
+                        Le mot de passe ne correspond pas.
+                    </div>
+                </section>
+
+    <?php } elseif ($_GET['error'] == 2) {
+
+            ?>
+    <section class="container-fluid d-flex justify-content-center align-items-start">
+            <div class="w-50 mt-5 alert alert-info text-center" role="alert">
+                Nous n'avons pas pu reconnaître votre id et mot de passe.
+        </div>
+    </section>
+       <?php } ?>
+
+    <?php } ?>
     <section class="container mt-5 d-flex justify-content-center align-item-center">
         <form action="models/login.php" method="POST">
             <div class="mb-3">
@@ -32,7 +57,7 @@
 
             <div class="d-flex flex-column ">
                 <input class="btn btn-primary" type="submit" value="Valider" name="login">
-                <div><p>Pas encore inscris ? <a href="register_form.php">créer un compte</a></p></div>
+                <div class="mt-2"><p>Pas encore inscris ? <a href="register_form.php">créer un compte</a></p></div>
             </div>
         </form>
     </section>

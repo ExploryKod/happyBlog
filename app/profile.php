@@ -1,8 +1,6 @@
-
 <?php
-
+session_start();
 require_once("models/db_connexion.php");
-
 $SelectYourPost = $pdo->prepare('SELECT * FROM posts INNER JOIN user WHERE posts.user_id = user.id');
 $SelectYourPost -> execute();
 $your_post_list = $SelectYourPost->fetchAll(PDO::FETCH_ASSOC);
@@ -12,14 +10,11 @@ $everyPost-> execute();
 $allposts = $everyPost-> fetchAll(PDO::FETCH_ASSOC);
 
 // As we can't use a session superglobal as we already call it, we fetch the user id from here:
-if(isset($your_post_list[0]['user_id'])) {
-$your_id = $your_post_list[0]['user_id'];
+if(isset($_SESSION['user'])) {
+$your_id = $_SESSION['user'];
 }
 // We create an array with all values but without repeated values:
 $allvalues = $allposts+$your_post_list;
-
-
-echo "----\n";
 
 require('layout.php'); ?>
 
@@ -58,7 +53,12 @@ require('layout.php'); ?>
             </div>
             <?php } ?>
 
-            <?php if(isset($your_id)) { ?>
+            <?php foreach ($allvalues as $post):
+                if($your_id != $post['user_id']):
+                    $article = false; ?>
+            <?php endif;
+                if($your_id === $post['user_id']):
+                    ?>
             <table class="table">
                     <thead>
                     <tr>
@@ -69,6 +69,8 @@ require('layout.php'); ?>
                     </tr>
                     </thead>
                     <tbody>
+
+
                     <?php foreach($allvalues as $one_post):
                         if($your_id === $one_post['user_id']):
                         ?>
@@ -85,7 +87,14 @@ require('layout.php'); ?>
                     <?php endforeach ?>
                     </tbody>
                     </table>
-                <?php } ?>
+                <?php else: ?>
+                <?php endif ?>
+                <?php endforeach ?>
+                <?php if(!$article): ?>
+                    <div class="w-50 mt-5 alert alert-info" role="alert">
+                Vous n'avez pas encore d'articles ou alors si vous venez de les créér : rafraîchissez la page.
+                </div>
+            <?php endif ?>
 
                 <h2 class="mt-2">Liste des articles écrit par d'autres talents: </h2>
                     <table class="table">
