@@ -26,7 +26,7 @@ if(!empty($_POST['username']) && !empty($_POST['password'])) {
         ]);
 
         //http_response_code(302);
-        header('Location: ../index.php');
+        header('Location: ../index.php?login=ok');
         die();
 
 

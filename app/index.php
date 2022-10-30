@@ -11,14 +11,30 @@
             </div>
         </div>
     </section>
-    <?php if(isset($_GET['erreur']) && !empty($_GET['erreur'])) {
 
-        if($_GET['erreur'] == 'alreadylog') {
+    <?php if(isset($_GET['error'])) { ?>
+        <?php if($_GET['error'] === 'alreadylog') {
             ?>
-        <div class="w-50 mt-5 alert alert-info" role="alert">
+        <div class="container w-50 mt-5 alert alert-info" role="alert">
             Vous avez déjà un compte chez nous: veuillez vous logger ci-dessous.
         </div>
-    <?php } } ?>
+        <?php } ?>
+
+        <?php if($_GET['error'] === 'info') { ?>
+            <div class="container w-50 mt-5 alert alert-success" role="alert">
+                Vous avez entré un mauvais password ou un mauvais pseudo. Réessayez.
+            </div>
+        <?php } ?>
+    <?php } ?>
+
+    <?php if(isset($_GET['login']))  {  ?>
+        <?php if($_GET['login'] === 'ok') { ?>
+            <div class="container w-50 mt-5 alert alert-success" role="alert">
+                Vous êtes bien loggé chez nous
+            </div>
+        <?php } ?>
+    <?php } ?>
+
     <section class="container mt-5 d-flex justify-content-center align-item-center">
         <form action="models/login.php" method="POST">
             <div class="mb-3">

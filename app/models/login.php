@@ -25,10 +25,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 die();
 
             }else{
-                header("Location: ../index.php?error=1");
+                header("Location: ../index.php?error=info");
                 die();
             };
         }
-        die();}
+        die();} else {
+        header("Location: ../index.php?error=empty");
+        die();
+    }
 
 }
