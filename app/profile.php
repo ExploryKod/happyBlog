@@ -1,6 +1,5 @@
-
 <?php
-
+session_start();
 require_once("models/db_connexion.php");
 
 $SelectYourPost = $pdo->prepare('SELECT * FROM posts INNER JOIN user WHERE posts.user_id = user.id');
@@ -11,7 +10,6 @@ $everyPost = $pdo->prepare('SELECT * FROM posts');
 $everyPost-> execute();
 $allposts = $everyPost-> fetchAll(PDO::FETCH_ASSOC);
 
-// As we can't use a session superglobal as we already call it, we fetch the user id from here:
 if(isset($your_post_list[0]['user_id'])) {
 $your_id = $your_post_list[0]['user_id'];
 }
@@ -19,7 +17,6 @@ $your_id = $your_post_list[0]['user_id'];
 $allvalues = $allposts+$your_post_list;
 
 
-echo "----\n";
 
 require('layout.php'); ?>
 
@@ -58,7 +55,7 @@ require('layout.php'); ?>
             </div>
             <?php } ?>
 
-            <?php if(isset($your_id)) { ?>
+            <?php if(isset($your_id) && ($_SESSION['user'] === $your_id)) { ?>
             <table class="table">
                     <thead>
                     <tr>
@@ -85,7 +82,13 @@ require('layout.php'); ?>
                     <?php endforeach ?>
                     </tbody>
                     </table>
-                <?php } ?>
+                <?php } else {  ?>
+
+                <div class="alert alert-success mx-auto my-2 w-75">
+                    <p class="fs-6 fw-bold p-3"> Vous n'avez pas encore créé d'articles. Libérez votre créativité, écrivez un article pour le montrer au monde.</p>
+                </div>
+
+                <?php }  ?>
 
                 <h2 class="mt-2">Liste des articles écrit par d'autres talents: </h2>
                     <table class="table">
