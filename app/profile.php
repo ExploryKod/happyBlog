@@ -10,6 +10,10 @@ $everyPost = $pdo->prepare('SELECT * FROM posts');
 $everyPost-> execute();
 $allposts = $everyPost-> fetchAll(PDO::FETCH_ASSOC);
 
+$everyUsers = $pdo->prepare('SELECT * FROM user');
+$everyUsers->execute();
+$allUsers = $everyUsers->fetchAll(PDO::FETCH_ASSOC);
+
 if(isset($your_post_list[0]['user_id'])) {
 $your_id = $your_post_list[0]['user_id'];
 }
@@ -20,31 +24,15 @@ $allvalues = $allposts+$your_post_list;
 
 require('layout.php'); ?>
 
-<main class="container-fluid">
-    <section class="container d-flex flex-column align-content-center justify-content-center">
+<main class="container">
+    <div class="container d-flex align-content-center justify-content-center mt-3 mb-2">
         <h1>Bienvenue sur votre page</h1>
+    </div>
+    <section class="container d-flex align-content-center justify-content-center gap-2">
         <a class="w-25 btn btn-primary btn-sm mt-2" href="logout.php">Me déconnecter</a>
         <button type="button" class="w-25 mt-2 btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#suppress-account-modal">Supprimer mon compte</button>
+        <button type="button" class="w-25 mt-2 btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#all_users">Liste des utilisateurs</button>
     </section>
-
-    <!-- Modal -->
-    <div class="modal fade" id="suppress-account-modal" tabindex="-1" aria-labelledby="suppress-account-modal" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Suppression du compte</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>En cliquant sur valider, vous supprimez votre compte et tous vos articles.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a role="button" href="models/delete_account.php" class="btn btn-primary">Supprimer mon compte</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <section class="mt-5 row">
 
@@ -69,14 +57,10 @@ require('layout.php'); ?>
         </article>
 
         <article class="col-sm-6 container d-flex flex-column align-items-start justify-content-start">
-            <h2>Liste de vos articles: </h2>
-            <?php if(!isset($your_id)) { ?>
-            <div class="w-50 mt-5 alert alert-info" role="alert">
-                Vous n'avez pas encore d'articles ou alors si vous venez de les créér : rafraîchissez la page.
-            </div>
-            <?php } ?>
+
 
             <?php if(isset($your_id) && ($_SESSION['user'] === $your_id)) { ?>
+                <h2>Liste de vos articles: </h2>
             <table class="table">
                     <thead>
                     <tr>
@@ -135,6 +119,46 @@ require('layout.php'); ?>
         </article>
 
     </section>
+
+    <div class="modal fade" id="all_users" tabindex="-1" aria-labelledby="suppress-account-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Liste des utilisateurs</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="list-group">
+                        <?php foreach($allUsers as $user): ?>
+                            <a class="list-group-item fs-2 text-dark" href="" ><?php echo $user['username'] ?></a>
+                        <?php endforeach ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="suppress-account-modal" tabindex="-1" aria-labelledby="suppress-account-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header border-0">
+                    <h5 class="modal-title" id="exampleModalLabel">Suppression du compte</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body border-0">
+                    <p>En cliquant sur valider, vous supprimez votre compte et tous vos articles.</p>
+                </div>
+                <div class="modal-footer border-0">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a role="button" href="models/delete_account.php" class="btn btn-primary">Supprimer mon compte</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
 </main>
 
 
