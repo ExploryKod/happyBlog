@@ -16,10 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $subscribed_users = $login->fetch();
         $row = $login->rowCount();
 
-        if($row > 0)
-        {
-            if(password_verify($password, $subscribed_users['password']))
-            {
+        if($row > 0) {
+            if(password_verify($password, $subscribed_users['password'])) {
                 $_SESSION['user'] =  $subscribed_users['id'];
                 header('Location: ../profile.php');
                 die();
@@ -28,10 +26,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: ../index.php?error=info");
                 die();
             };
+        } else {
+            header("Location: ../index.php?error=no-info");
+            die();
         }
-        die();} else {
-        header("Location: ../index.php?error=empty");
-        die();
+    } else {
+    header("Location: ../index.php?error=empty");
+    die();
     }
 
+} else {
+    header("Location: ../index.php?error=no-post");
+    die();
 }

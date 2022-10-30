@@ -23,8 +23,29 @@ require('layout.php'); ?>
 <main class="container-fluid">
     <section class="container d-flex flex-column align-content-center justify-content-center">
         <h1>Bienvenue sur votre page</h1>
-        <a class="w-25 btn btn-primary btn-sm" href="logout.php">Me déconnecter</a>
+        <a class="w-25 btn btn-primary btn-sm mt-2" href="logout.php">Me déconnecter</a>
+        <button type="button" class="w-25 mt-2 btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#suppress-account-modal">Supprimer mon compte</button>
     </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="suppress-account-modal" tabindex="-1" aria-labelledby="suppress-account-modal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Suppression du compte</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>En cliquant sur valider, vous supprimez votre compte et tous vos articles.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <a role="button" href="models/delete_account.php" class="btn btn-primary">Supprimer mon compte</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <section class="mt-5 row">
 
         <article class="col-sm-6 container-fluid d-flex align-items-start justify-content-center">
