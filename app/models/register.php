@@ -6,8 +6,9 @@ if(!empty($_POST['username']) && !empty($_POST['password'])) {
 
     $username = htmlspecialchars($_POST['username']);
     $password = htmlspecialchars($_POST['password']);
+    $admin = 0;
 
-    $check = $pdo->prepare('SELECT username, password FROM user WHERE username = ?');
+    $check = $pdo->prepare('SELECT username, password, admin FROM user WHERE username = ?');
     $check->execute(array($username));
     $data = $check->fetch();
     $row = $check->rowCount();
@@ -19,10 +20,11 @@ if(!empty($_POST['username']) && !empty($_POST['password'])) {
         $cost = ['cost' => 12];
         $password = password_hash($password, PASSWORD_BCRYPT, $cost);
 
-        $insert = $pdo->prepare('INSERT INTO user(username, password) VALUES(:username, :password)');
+        $insert = $pdo->prepare('INSERT INTO user(username, password, admin) VALUES(:username, :password, :admin)');
         $insert->execute([
             ":username" => $username,
-            ":password" => $password
+            ":password" => $password,
+            ":admin" => $admin
         ]);
 
         //http_response_code(302);

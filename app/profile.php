@@ -14,6 +14,13 @@ $everyUsers = $pdo->prepare('SELECT * FROM user');
 $everyUsers->execute();
 $allUsers = $everyUsers->fetchAll(PDO::FETCH_ASSOC);
 
+$user_session_id = $_SESSION['user'];
+$you = $pdo->prepare('SELECT * FROM user WHERE id = :user_session_id');
+$you->execute(
+        [':user_session_id' => $user_session_id]
+);
+$only_you = $you->fetch();
+
 if(isset($your_post_list[0]['user_id'])) {
 $your_id = $your_post_list[0]['user_id'];
 }
@@ -32,7 +39,15 @@ require('layout.php'); ?>
         <a class="w-25 btn btn-primary btn-sm mt-2" href="logout.php">Me déconnecter</a>
         <button type="button" class="w-25 mt-2 btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#suppress-account-modal">Supprimer mon compte</button>
         <button type="button" class="w-25 mt-2 btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#all_users">Liste des utilisateurs</button>
+        <a class="fs-5 w-25 text-primary" href="admin.php">Devenir administrateur</a>
     </section>
+    <?php if($_GET['admin'] === 'ok') { ?>
+    <div class="container d-flex align-content-center justify-content-center my-2">
+        <div class="alert alert-success p-2">
+            <p class="fs-5 text-center">Vous êtes désormais administrateur: vos nouveaux pouvoirs magiques sont apparus plus bas.</p>
+        </div>
+    </div>
+    <?php } ?>
 
     <section class="mt-5 row">
 
@@ -120,17 +135,47 @@ require('layout.php'); ?>
 
     </section>
 
+    <?php  if($only_you['admin'] === 1) { ?>
+            <section class="container row mt-5 rounded shadow bg-white align-items-center justify-content-center">
+                <h2 class="text-center fs-5"> Vos droits administrateurs</h2>
+                    <article class="col-sm-6">
+                    <?php foreach($allUsers as $user): ?>
+                        <div class="list-group-item d-flex justify-content-center align-items-center">
+                            <a class="fs-2 text-dark text-center" href="" >
+                                <?php echo $user['username'] ?>
+                            </a>
+                            <?php if($user['admin'] === 1) { ?>
+                                <a href="" class="text-info ms-5">Demandes</a>
+                            <?php } else { ?>
+                                <a class="text-danger ms-5" href="models/delete_user.php?identity_user=<?= $user['id'] ?>">Supprimer</a>
+                            <?php } ?>
+                        </div>
+                    <?php endforeach ?>
+                </article>
+            </section>
+    <?php } ?>
+    
+
     <div class="modal fade" id="all_users" tabindex="-1" aria-labelledby="suppress-account-modal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Liste des utilisateurs</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Liste des membres et leur statut</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="list-group">
                         <?php foreach($allUsers as $user): ?>
-                            <a class="list-group-item fs-2 text-dark" href="" ><?php echo $user['username'] ?></a>
+                        <div class="list-group-item">
+                            <a class="fs-2 text-dark" href="" >
+                                <?php echo $user['username'] ?>
+                            </a>
+                            <?php if($user['admin'] === 1) { ?>
+                            <p>Administrateur</p>
+                            <?php } else { ?>
+                            <p>Utilisateur</p>
+                            <?php } ?>
+                        </div>
                         <?php endforeach ?>
                     </div>
                 </div>

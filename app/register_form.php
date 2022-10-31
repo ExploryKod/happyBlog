@@ -1,4 +1,3 @@
-
 <?php require("layout.php") ?>
 
     <main class="container-fluid p-0">
