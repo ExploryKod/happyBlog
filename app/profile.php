@@ -39,9 +39,13 @@ require('layout.php'); ?>
         <a class="w-25 btn btn-primary btn-sm mt-2" href="logout.php">Me déconnecter</a>
         <button type="button" class="w-25 mt-2 btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#suppress-account-modal">Supprimer mon compte</button>
         <button type="button" class="w-25 mt-2 btn btn-info btn-sm" data-bs-toggle="modal" data-bs-target="#all_users">Liste des utilisateurs</button>
+        <?php if($only_you['admin'] !== 1) { ?>
         <a class="fs-5 w-25 text-primary" href="admin.php">Devenir administrateur</a>
+        <?php } else {   ?>
+        <p>Statut: administrateur</p>
+        <?php } ?>
     </section>
-    <?php if($_GET['admin'] === 'ok') { ?>
+    <?php if(isset($_GET['admin']) && $_GET['admin'] === 'ok') { ?>
     <div class="container d-flex align-content-center justify-content-center my-2">
         <div class="alert alert-success p-2">
             <p class="fs-5 text-center">Vous êtes désormais administrateur: vos nouveaux pouvoirs magiques sont apparus plus bas.</p>
@@ -136,7 +140,7 @@ require('layout.php'); ?>
     </section>
 
     <?php  if($only_you['admin'] === 1) { ?>
-            <section class="container row mt-5 rounded shadow bg-white align-items-center justify-content-center">
+            <section class="container w-75 m-auto row mt-5 shadow bg-white rounded align-items-center justify-content-center">
                 <h2 class="text-center fs-5"> Vos droits administrateurs</h2>
                     <article class="col-sm-6">
                     <?php foreach($allUsers as $user): ?>

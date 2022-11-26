@@ -27,6 +27,8 @@ if(!empty($_POST['username']) && !empty($_POST['password'])) {
             ":admin" => $admin
         ]);
 
+        // Variante => via la méthode bindValue ($query->bindValue("password", $password, PDO::PARAM_STR);
+
         //http_response_code(302);
         header('Location: ../index.php?login=ok');
         die();

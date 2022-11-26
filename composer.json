@@ -1,0 +1,9 @@
+{
+    "name": "amaur/happyblog",
+    "autoload": {
+        "psr-4": {
+            "Amaur\\Happyblog\\": "src/"
+        }
+    },
+    "require": {}
+}
